@@ -3,27 +3,95 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Antonio Pierro - Processign Project</title>
+        <title>Alice Andrea Deiana - Processign Project</title>
         <script src="vendors/processing.min.js"></script>
     </head>
     <body>
-        <h1>Processing project by Antonio</h1>
+        <h1>Processing project by Alice</h1>
         <script type="text/processing">
 
-            // Write your project here
-            
-            // Example
-            void setup() {
-              size(200, 200);
-              background(255);
-            }
-            void draw(){
-                pushMatrix();
-                translate(100, 100);
-                rotate(radians(frameCount * 2  % 360));
-                rect(0, 0, 80, 5);
-                popMatrix();
-            }
+            float numframe;
+ int lato=100;
+ float r;
+ float s=0;
+ float a=0;
+
+
+void setup ()
+{
+  size(600,600);
+  frameRate(60);
+  strokeWeight(1);
+  noStroke();
+  
+  
+ }
+
+
+ 
+void draw(){
+  background(0);
+  fill(255);
+  text("Clicca e tieni premuto!", 174, 570);
+  textSize(23);
+  
+  //Le forme ruotano quando clicco il mouse
+     if(mousePressed==true){ 
+    if (r == r+0.5) {
+    r=0;
+  } else {
+    r+=0.5;}}
+ 
+  sierp(200,350,0);
+
+  sierp(300,350,0);
+  
+  sierp(250,265,0);
+  
+  //Dopo poco più di due secondi entra il triangolo bianco che oscilla
+  if(frameCount>150){
+   a+=0.02;
+  s=cos(a)*2;
+  scale(s);
+  fill(255,255,255,200);
+  triangolo(300,300,50);}
+ 
+  
+
+  }
+
+  //Gruppo di tre triangoli
+  void sierp(int x,int y, float s){
+
+  
+  fill(255,0,255,150);
+  triangolo(x,y,lato);
+  pushMatrix();
+  translate(x,y);
+  rotate(radians(r+180));
+  fill(0,255,255,150);
+  triangolo(0,0,lato);//0 perché ora il vertice a è nel centro di rotazione
+  popMatrix();
+   pushMatrix();
+  translate(x+lato,y);
+  rotate(radians(-r+60));
+  fill(0,255,0,150);
+  triangolo(0,0,lato);//0 perché ora il vertice a è nel centro di rotazione
+  popMatrix();
+ }
+ 
+ 
+ 
+ 
+ //Triangolo equilatero
+ void triangolo(int x, int y, int lato){//Triangolo equilatero
+   float x2= x+lato/2;
+   float x3= x+lato;
+   float y2= y - sqrt(pow(lato,2) - pow(lato/2,2));
+   float y3= y;
+   triangle(x,y,x2,y2,x3,y3);
+ }
+ 
             
         </script>
         <canvas></canvas>
